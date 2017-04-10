@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<barcode>
+	<code128>
+		<height>532pt</height>
+		<module-width>3</module-width>
+		<wide-factor>2</wide-factor>
+	</code128>
+</barcode>

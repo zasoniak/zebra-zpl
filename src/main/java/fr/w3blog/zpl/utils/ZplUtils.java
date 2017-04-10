@@ -5,15 +5,14 @@ import fr.w3blog.zpl.constant.ZebraPPP;
 
 /**
  * Common method used to manipulate ZPL
- * 
+ *
  * @author ttropard
- * 
  */
 public class ZplUtils {
 
 	/**
 	 * Fonction called by zplCommand to cast variable object and ajust for zpl code
-	 * 
+	 *
 	 * @param object
 	 */
 	private static String variableObjectToZplCode(Object object) {
@@ -36,11 +35,9 @@ public class ZplUtils {
 
 	/**
 	 * Method to quickly generate zpl code with command and variable
-	 * 
-	 * @param command
-	 *            Command (without ^)
-	 * @param variables
-	 *            list variable
+	 *
+	 * @param command   Command (without ^)
+	 * @param variables list variable
 	 * @return
 	 */
 	public static StringBuilder zplCommand(String command) {
@@ -52,11 +49,9 @@ public class ZplUtils {
 
 	/**
 	 * Method to quickly generate zpl code with command and variable
-	 * 
-	 * @param command
-	 *            Command (without ^)
-	 * @param variables
-	 *            list variable
+	 *
+	 * @param command   Command (without ^)
+	 * @param variables list variable
 	 * @return
 	 */
 	public static StringBuilder zplCommandSautLigne(String command) {
@@ -67,11 +62,9 @@ public class ZplUtils {
 
 	/**
 	 * Method to quickly generate zpl code with command and variable
-	 * 
-	 * @param command
-	 *            Command (without ^)
-	 * @param variables
-	 *            list variable
+	 *
+	 * @param command   Command (without ^)
+	 * @param variables list variable
 	 * @return
 	 */
 	public static StringBuilder zplCommand(String command, Object... variables) {
@@ -93,11 +86,9 @@ public class ZplUtils {
 
 	/**
 	 * Method to quickly generate zpl code with command and variable
-	 * 
-	 * @param command
-	 *            Command (without ^)
-	 * @param variables
-	 *            list variable
+	 *
+	 * @param command   Command (without ^)
+	 * @param variables list variable
 	 * @return
 	 */
 	public static StringBuilder zplCommandSautLigne(String command, Object... variables) {
@@ -108,14 +99,14 @@ public class ZplUtils {
 
 	/**
 	 * Extract from font, fontSize and PPP the height and width in dots.
-	 * 
+	 * <p>
 	 * Fonts and PPP are not all supported.
 	 * Please complete this method or use dot in yous params
-	 * 
+	 *
 	 * @param zebraFont
 	 * @param fontSize
 	 * @param zebraPPP
-	 * @return array[height,width] in dots
+	 * @return array[height, width] in dots
 	 */
 	public static Integer[] extractDotsFromFont(ZebraFont zebraFont, int fontSize, ZebraPPP zebraPPP) {
 		Integer[] array = new Integer[2];
@@ -132,19 +123,19 @@ public class ZplUtils {
 
 	/**
 	 * Convert point(pt) in pixel(px)
-	 * 
+	 *
 	 * @param point
 	 * @return
 	 */
 	public static Integer convertPointInPixel(int point) {
-		return Math.round(point * 1.33F);
+		return point;
+//		return Math.round(point * 1.33F);
 	}
 
 	/**
 	 * Function used to converted ASCII >127 in \hexaCode accepted by ZPL language
-	 * 
-	 * @param str
-	 *            str
+	 *
+	 * @param str str
 	 * @return string with charactere remove
 	 */
 	public static String convertAccentToZplAsciiHexa(String str) {

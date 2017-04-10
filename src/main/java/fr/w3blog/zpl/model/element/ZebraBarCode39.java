@@ -2,14 +2,17 @@ package fr.w3blog.zpl.model.element;
 
 import fr.w3blog.zpl.model.PrinterOptions;
 import fr.w3blog.zpl.utils.ZplUtils;
+import fr.w3blog.zpl.utils.barcode.BarcodeGenerator;
+import fr.w3blog.zpl.utils.barcode.BarcodeTypes;
+
+import java.awt.*;
 
 /**
  * Element to create a bar code 39
- * 
+ * <p>
  * Zpl command : ^B3 and ^BY
- * 
+ *
  * @author ttropard
- * 
  */
 public class ZebraBarCode39 extends ZebraBarCode {
 
@@ -51,4 +54,21 @@ public class ZebraBarCode39 extends ZebraBarCode {
 		return this;
 	}
 
+	public void drawPreviewGraphic(PrinterOptions printerOptions, Graphics2D graphic) {
+		try {
+			BarcodeGenerator generator = new BarcodeGenerator(BarcodeTypes.DHL_CODE_39);
+			graphic.setColor(Color.BLACK);
+			int top = 0;
+			int left = 0;
+			if (positionX != null) {
+				left = ZplUtils.convertPointInPixel(positionX);
+			}
+			if (positionY != null) {
+				top = ZplUtils.convertPointInPixel(positionY);
+			}
+			generator.printBarcode(graphic, text, left, top);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
