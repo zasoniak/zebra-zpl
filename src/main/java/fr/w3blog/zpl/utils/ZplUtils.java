@@ -111,10 +111,24 @@ public class ZplUtils {
 	public static Integer[] extractDotsFromFont(ZebraFont zebraFont, int fontSize, ZebraPPP zebraPPP) {
 		Integer[] array = new Integer[2];
 
-		if (ZebraFont.ZEBRA_ZERO.equals(zebraFont) && ZebraPPP.DPI_300.equals(zebraPPP)) {
-			//We use ratio to converted (based on ratio used by Zebra Designer Tools)
-			array[0] = Math.round(fontSize * 4.16F);//Heigth
-			array[1] = Math.round(fontSize * 4.06F);//With
+		if (ZebraFont.ZEBRA_ZERO.equals(zebraFont)) {
+			switch (zebraPPP) {
+				case DPI_203:
+					array[0] = Math.round(fontSize / 2.8224F);//Heigth
+					array[1] = Math.round(fontSize / 2.7546F);//With
+					break;
+				case DPI_300:
+					array[0] = Math.round(fontSize / 4.2336F);//Heigth
+					array[1] = Math.round(fontSize / 4.1318F);//With
+					break;
+				case DPI_600:
+					array[0] = Math.round(fontSize / 8.4672F);//Heigth
+					array[1] = Math.round(fontSize / 8.2637F);//With
+					break;
+				default:
+					array[0] = Math.round(fontSize);//Heigth
+					array[1] = Math.round(fontSize);//With
+			}
 		} else {
 			throw new UnsupportedOperationException("This PPP and this font are not yet supported. Please use ZebraAFontElement.");
 		}

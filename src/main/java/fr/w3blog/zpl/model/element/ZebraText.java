@@ -1,8 +1,5 @@
 package fr.w3blog.zpl.model.element;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
-
 import fr.w3blog.zpl.constant.ZebraFont;
 import fr.w3blog.zpl.constant.ZebraJustification;
 import fr.w3blog.zpl.constant.ZebraRotation;
@@ -10,11 +7,12 @@ import fr.w3blog.zpl.model.PrinterOptions;
 import fr.w3blog.zpl.model.ZebraElement;
 import fr.w3blog.zpl.utils.ZplUtils;
 
+import java.awt.*;
+
 /**
  * Zebra element to add Text to specified position.
- * 
+ *
  * @author ttropard
- * 
  */
 public class ZebraText extends ZebraElement {
 
@@ -25,6 +23,8 @@ public class ZebraText extends ZebraElement {
 	 * Not in dots.
 	 */
 	Integer fontSize = null;
+	Integer width = null;
+	Integer height = null;
 
 	ZebraRotation zebraRotation = ZebraRotation.NORMAL;
 
@@ -90,6 +90,17 @@ public class ZebraText extends ZebraElement {
 		this.positionY = positionY;
 	}
 
+	public ZebraText(int positionX, int positionY, String text, ZebraFont zebraFont, int height, int width, ZebraRotation rotation, ZebraJustification justification) {
+		this.zebraFont = zebraFont;
+		this.height = height;
+		this.width = width;
+		this.text = text;
+		this.positionX = positionX;
+		this.positionY = positionY;
+		this.zebraRotation = rotation;
+		this.justification = justification;
+	}
+
 	/* (non-Javadoc)
 	 * @see fr.w3blog.zpl.model.element.ZebraElement#getZplCode(fr.w3blog.zpl.model.PrinterOptions)
 	 */
@@ -108,7 +119,7 @@ public class ZebraText extends ZebraElement {
 			zpl.append(ZplUtils.zplCommand("A", printerOptions.getDefaultZebraFont().getLetter() + zebraRotation.getLetter(), dimension[0], dimension[1]));
 		}
 
-		zpl.append("^FH\\^FD");//We allow hexadecimal and start element
+		zpl.append("^FD");//We allow hexadecimal and start element
 		zpl.append(ZplUtils.convertAccentToZplAsciiHexa(text));
 		zpl.append(ZplUtils.zplCommandSautLigne("FS"));
 
@@ -118,9 +129,9 @@ public class ZebraText extends ZebraElement {
 	/**
 	 * Used to draw label preview.
 	 * This method should be overloader by child class.
-	 * 
+	 * <p>
 	 * Default draw a rectangle
-	 * 
+	 *
 	 * @param graphic
 	 */
 	public void drawPreviewGraphic(PrinterOptions printerOptions, Graphics2D graphic) {
@@ -138,18 +149,18 @@ public class ZebraText extends ZebraElement {
 
 			if (fontSize != null && zebraFont != null) {
 				//This element has specified size and font
-				Integer[] dimension = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP());
+				Integer[] dimension = ZplUtils.extractDotsFromFont(zebraFont, fontSize, printerOptions.getZebraPPP());
 
-				font = new Font(ZebraFont.findBestEquivalentFontForPreview(zebraFont), Font.BOLD, dimension[0]);
+				font = new Font(ZebraFont.findBestEquivalentFontForPreview(zebraFont), Font.PLAIN, dimension[0]);
 			} else if (fontSize != null && printerOptions.getDefaultZebraFont() != null) {
 				//This element has specified size, but with default font
 				Integer[] dimensionPoint = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), fontSize, printerOptions.getZebraPPP());
-				font = new Font(ZebraFont.findBestEquivalentFontForPreview(printerOptions.getDefaultZebraFont()), Font.BOLD, Math.round(dimensionPoint[0] / 1.33F));
+				font = new Font(ZebraFont.findBestEquivalentFontForPreview(printerOptions.getDefaultZebraFont()), Font.PLAIN, Math.round(dimensionPoint[0] / 1.33F));
 			} else {
 				//Default font on Printer Zebra
 				Integer[] dimensionPoint = ZplUtils.extractDotsFromFont(printerOptions.getDefaultZebraFont(), 15, printerOptions.getZebraPPP());
 
-				font = new Font(ZebraFont.findBestEquivalentFontForPreview(ZebraFont.ZEBRA_A), Font.BOLD, dimensionPoint[0]);
+				font = new Font(ZebraFont.findBestEquivalentFontForPreview(ZebraFont.ZEBRA_A), Font.PLAIN, dimensionPoint[0]);
 			}
 			drawTopString(graphic, font, text, left, top);
 		}

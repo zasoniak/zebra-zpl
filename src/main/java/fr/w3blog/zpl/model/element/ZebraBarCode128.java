@@ -9,11 +9,10 @@ import java.awt.*;
 
 /**
  * Element to create a bar code 128
- * 
+ * <p>
  * Zpl command : ^BC
- * 
+ *
  * @author matthiasvets
- * 
  */
 public class ZebraBarCode128 extends ZebraBarCode {
 
@@ -65,7 +64,7 @@ public class ZebraBarCode128 extends ZebraBarCode {
 
 	public void drawPreviewGraphic(PrinterOptions printerOptions, Graphics2D graphic) {
 		try {
-			BarcodeGenerator generator = new BarcodeGenerator(BarcodeTypes.DHL_CODE_128);
+//			BarcodeGenerator generator = new BarcodeGenerator(BarcodeTypes.DHL_CODE_128, barCodeHeigth, 3, 2);
 			graphic.setColor(Color.BLACK);
 			int top = 0;
 			int left = 0;
@@ -75,7 +74,7 @@ public class ZebraBarCode128 extends ZebraBarCode {
 			if (positionY != null) {
 				top = ZplUtils.convertPointInPixel(positionY);
 			}
-			generator.printBarcode(graphic, text, left, top);
+			BarcodeGenerator.printBarcode(BarcodeTypes.DHL_CODE_128, barCodeHeigth, 640.0, 3, 2, graphic, text, left, top);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

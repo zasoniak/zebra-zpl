@@ -56,7 +56,7 @@ public class ZebraBarCode39 extends ZebraBarCode {
 
 	public void drawPreviewGraphic(PrinterOptions printerOptions, Graphics2D graphic) {
 		try {
-			BarcodeGenerator generator = new BarcodeGenerator(BarcodeTypes.DHL_CODE_39);
+//			BarcodeGenerator generator = new BarcodeGenerator(BarcodeTypes.DHL_CODE_39, barCodeHeigth, 3, 2);
 			graphic.setColor(Color.BLACK);
 			int top = 0;
 			int left = 0;
@@ -66,7 +66,7 @@ public class ZebraBarCode39 extends ZebraBarCode {
 			if (positionY != null) {
 				top = ZplUtils.convertPointInPixel(positionY);
 			}
-			generator.printBarcode(graphic, text, left, top);
+			BarcodeGenerator.printBarcode(BarcodeTypes.DHL_CODE_39, barCodeHeigth, null, 3, 2, graphic, text, left, top);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

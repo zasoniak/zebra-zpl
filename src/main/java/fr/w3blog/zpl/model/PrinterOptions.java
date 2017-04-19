@@ -12,7 +12,7 @@ import fr.w3blog.zpl.constant.ZebraPPP;
  */
 public class PrinterOptions {
 
-	private ZebraPPP zebraPPP = ZebraPPP.DPI_300;
+	private ZebraPPP zebraPPP = ZebraPPP.DPI_203;
 
 	private ZebraFont defaultZebraFont = null;
 

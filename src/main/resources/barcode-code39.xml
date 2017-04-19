@@ -4,5 +4,8 @@
 		<height>100pt</height>
 		<module-width>3</module-width>
 		<wide-factor>2</wide-factor>
+		<human-readable>
+			<placement>none</placement>
+		</human-readable>
 	</code39>
 </barcode>
