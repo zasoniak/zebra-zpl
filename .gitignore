@@ -1,4 +1,15 @@
 /target
 target
-/bin
-bin
+
+.settings
+.idea
+
+test.jpeg
+test.pdf
+test.png
+test.txt
+test.zpl
+
+
+*.iml
+src/main/java/com/pretius/zpl/utils/barcode/BarcodeTypes.java
